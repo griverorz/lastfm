@@ -2,7 +2,7 @@
 
 '''
 @author: Gonzalo Rivero
-@date Thu Oct 30 20:24:47 PDT 2014
+@date Sun May  3 19:55:01 PDT 2015
 Create tables for storing lastfm data
 '''
 
@@ -51,6 +51,6 @@ def create_db():
     engine = create_engine("postgresql://gonzalorivero:root@localhost:5432/lastfm")
     DBase.metadata.create_all(engine)
 
-
+    
 if __name__ == "__main__":
     create_db()

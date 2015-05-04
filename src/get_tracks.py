@@ -4,7 +4,7 @@
 
 '''
 @author: Gonzalo Rivero
-@date Thu Oct 30 20:24:47 PDT 2014
+@date Sun May  3 19:56:08 PDT 2015
 Extract personal information from Last.fm
 '''
 
@@ -116,12 +116,6 @@ class ExtractMusic:
             ptrack["album"] = tt.album
             ptrack["username"] = self.user.get_name()
             return ptrack 
-
-        # def _combine_tracks(tracks):
-        #     out = dict.fromkeys(["artist", "song", "album", "timestamp"])
-        #     for k in out.keys():
-        #         out[k] = [i[k] for i in tracks]
-        #     return out
     
         artist_tracks = map(_parse_track, tracks)
         return artist_tracks
@@ -133,14 +127,6 @@ class ExtractMusic:
             self.session.add(new_track)
             self.session.commit()
     
-
-    # def get_track_info(self, artist, song):
-    #     track = self.network.get_track(artist, song)
-    #     album = track.get_album()
-    #     trackinfo = self.get_info(track)
-    #     albuminfo = self.get_info(album)
-    #     return trackinfo, albuminfo
-
 
     def connect_sql(self):
         DBase = declarative_base()
@@ -189,7 +175,6 @@ def main(argv):
     musicdata.get_user(uname)
     musicdata.get_artists(alimit)
     get_music(musicdata)
-            
 
 
 if __name__ == '__main__':

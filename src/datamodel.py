@@ -20,6 +20,7 @@ conn = pg.connect(database='lastfm',
                   password='root', 
                   port='5432')
 
+
 cur = conn.cursor()
 f = open('tagdata.sql', 'r')
 cur.execute(f.read())
@@ -47,6 +48,7 @@ fulldist.loc[np.isnan(fulldist.counts), "counts"] = 0
 mtag = [list(fulldist.loc[fulldist.day == i, "prop"]) for i in set(fulldist.day)]
 day = list(set(fulldist.day))
 
+
 with pm.Model() as per_model:
     ''' Model underlying states '''
     state = pm.Bernoulli('state', p=0.5, shape=len(day))
@@ -65,7 +67,7 @@ with pm.Model() as per_model:
 
     ## empty theta
     for i, j in enumerate(day):
-        theta[i] = T.dot(state[i], beta.T)
+        theta[i] = alpha + T.dot(state[i], beta.T)
         p_vec[i] = invlogit(theta[i])
 
         # Data likelihood
